@@ -1,0 +1,301 @@
+tb_Perfil
+| Campo            | Tipo        | Obrigatório | Descrição                         |
+| ---------------- | ----------- | ----------- | --------------------------------- |
+| pk_cpf           | CHAR(11)    | Sim         | CPF do indivíduo (chave primária) |
+| nome             | VARCHAR(50) | Sim         | Nome civil                        |
+| nome_social      | VARCHAR(50) | Não         | Nome social                       |
+| data_nascimento  | DATE        | Sim         | Data de nascimento                |
+| fk_id_etnia      | INT         | Sim         | Referência à etnia                |
+| fk_id_genero     | INT         | Sim         | Referência ao gênero              |
+| fk_id_orientacao | INT         | Sim         | Referência à orientação sexual    |
+| estado_civil     | VARCHAR(20) | Sim         | Estado civil                      |
+| numero_filhos    | TINYINT     | Não         | Quantidade de filhos              |
+
+
+tb_endereco_email
+| Campo       | Tipo         | Obrigatório | Descrição              |
+| ----------- | ------------ | ----------- | ---------------------- |
+| pk_id_email | INT          | Sim         | Identificador do email |
+| fk_cpf      | CHAR(11)     | Sim         | CPF vinculado          |
+| email       | VARCHAR(100) | Sim         | Email do usuário       |
+
+
+tb_numero_telefone
+| Campo        | Tipo        | Obrigatório | Descrição                 |
+| ------------ | ----------- | ----------- | ------------------------- |
+| pk_id_numero | INT         | Sim         | Identificador do telefone |
+| fk_cpf       | CHAR(11)    | Sim         | CPF vinculado             |
+| telefone     | VARCHAR(11) | Sim         | Número telefônico         |
+
+
+tb_endereco_residencial
+| Campo             | Tipo        | Obrigatório | Descrição                 |
+| ----------------- | ----------- | ----------- | ------------------------- |
+| pk_id_endereco    | INT         | Sim         | Identificador do endereço |
+| fk_cpf            | CHAR(11)    | Sim         | CPF vinculado             |
+| cep               | CHAR(8)     | Sim         | CEP                       |
+| logradouro        | VARCHAR(50) | Sim         | Rua/Avenida               |
+| numero_residencia | VARCHAR(10) | Sim         | Número                    |
+| complemento       | VARCHAR(30) | Não         | Complemento               |
+| bairro            | VARCHAR(30) | Sim         | Bairro                    |
+| cidade            | VARCHAR(50) | Sim         | Cidade                    |
+| uf                | CHAR(2)     | Sim         | Estado                    |
+
+
+tb_etnias
+| Campo       | Tipo        | Descrição          |
+| ----------- | ----------- | ------------------ |
+| pk_id_etnia | INT         | Identificador      |
+| tipo_etnia  | VARCHAR(50) | Descrição da etnia |
+
+
+tb_generos
+| Campo        | Tipo        | Descrição     |
+| ------------ | ----------- | ------------- |
+| pk_id_genero | INT         | Identificador |
+| tipo_genero  | VARCHAR(50) | Gênero        |
+
+
+tb_orientacao_sexual
+| Campo            | Tipo        | Descrição     |
+| ---------------- | ----------- | ------------- |
+| pk_id_orientacao | INT         | Identificador |
+| tipo_orientacao  | VARCHAR(50) | Orientação    |
+
+
+tb_deficiencias
+| Campo             | Tipo        | Descrição     |
+| ----------------- | ----------- | ------------- |
+| pk_id_deficiencia | INT         | Identificador |
+| tipo_deficiencia  | VARCHAR(50) | Tipo          |
+
+tb_perfil_deficiencias
+| Campo                    | Tipo     | Descrição   |
+| ------------------------ | -------- | ----------- |
+| pk_id_perfil_deficiencia | INT      | Identador   |
+| fk_cpf                   | CHAR(11) | Perfil      |
+| fk_id_deficiencia        | INT      | Deficiência |
+
+
+tb_login
+| Campo           | Tipo         | Descrição           |
+| --------------- | ------------ | ------------------- |
+| pk_id_login     | INT          | Identificador       |
+| email_academico | VARCHAR(100) | Email institucional |
+| senha           | VARCHAR(100) | Senha               |
+| tipo_acesso     | VARCHAR(20)  | Tipo de acesso      |
+
+
+tb_aluno
+| Campo       | Tipo     | Descrição     |
+| ----------- | -------- | ------------- |
+| pk_id_aluno | INT      | Identificador |
+| fk_id_login | INT      | Login         |
+| fk_cpf      | CHAR(11) | Perfil        |
+
+
+tb_cursos
+| Campo       | Tipo        | Descrição     |
+| ----------- | ----------- | ------------- |
+| pk_id_curso | INT         | Identificador |
+| nome_curso  | VARCHAR(50) | Nome do curso |
+
+
+tb_disciplinas
+| Campo            | Tipo         | Descrição     |
+| ---------------- | ------------ | ------------- |
+| pk_id_disciplina | INT          | Identificador |
+| fk_id_curso      | INT          | Curso         |
+| nome_disciplina  | VARCHAR(100) | Nome          |
+
+
+tb_turmas
+| Campo       | Tipo        | Descrição     |
+| ----------- | ----------- | ------------- |
+| pk_id_turma | INT         | Identificador |
+| fk_id_curso | INT         | Curso         |
+| semestre    | VARCHAR(20) | Semestre      |
+| ano         | DATE        | Ano           |
+
+
+tb_matricula
+| Campo           | Tipo | Descrição     |
+| --------------- | ---- | ------------- |
+| pk_id_matricula | INT  | Identificador |
+| fk_id_aluno     | INT  | Aluno         |
+| fk_id_turma     | INT  | Turma         |
+| data_matricula  | DATE | Data          |
+
+
+tb_notas
+| Campo            | Tipo | Descrição     |
+| ---------------- | ---- | ------------- |
+| pk_id_nota       | INT  | Identificador |
+| fk_id_matricula  | INT  | Matrícula     |
+| fk_id_disciplina | INT  | Disciplina    |
+| valor_nota       | INT  | Nota          |
+| data_nota        | DATE | Data          |
+
+
+tb_faltas
+| Campo            | Tipo | Descrição     |
+| ---------------- | ---- | ------------- |
+| pk_id_falta      | INT  | Identificador |
+| fk_id_matricula  | INT  | Matrícula     |
+| fk_id_disciplina | INT  | Disciplina    |
+| data_falta       | DATE | Data          |
+
+
+tb_funcionarios
+| Campo                   | Tipo     | Descrição     |
+| ----------------------- | -------- | ------------- |
+| pk_id_funcionario       | INT      | Identificador |
+| fk_cpf                  | CHAR(11) | Perfil        |
+| fk_id_cargo_funcionario | INT      | Cargo         |
+| data_contratado         | DATE     | Admissão      |
+
+
+tb_cargos
+| Campo                   | Tipo        | Descrição     |
+| ----------------------- | ----------- | ------------- |
+| pk_id_cargo_funcionario | INT         | Identificador |
+| nome_cargo              | VARCHAR(30) | Nome          |
+| descricao_cargo         | VARCHAR(50) | Descrição     |
+
+
+tb_professores
+| Campo                   | Tipo        | Descrição     |
+| ----------------------- | ----------- | ------------- |
+| pk_id_cargo_funcionario | INT         | Identificador |
+| nome_cargo              | VARCHAR(30) | Nome          |
+| descricao_cargo         | VARCHAR(50) | Descrição     |
+
+
+| Campo             | Tipo | Descrição     |
+| ----------------- | ---- | ------------- |
+| pk_id_professor   | INT  | Identificador |
+| fk_id_login       | INT  | Login         |
+| fk_id_funcionario | INT  | Funcionário   |
+
+
+tb_professor_turma
+| Campo           | Tipo | Descrição     |
+| --------------- | ---- | ------------- |
+| pk_id_alocacao  | INT  | Identificador |
+| fk_id_professor | INT  | Professor     |
+| fk_id_turma     | INT  | Turma         |
+
+
+tb_tipo_beneficio
+| Campo                | Tipo        | Descrição     |
+| -------------------- | ----------- | ------------- |
+| pk_id_tipo_beneficio | INT         | Identificador |
+| nome_beneficio       | VARCHAR(20) | Nome          |
+
+
+tb_beneficio_funcionario
+| Campo                       | Tipo         | Descrição     |
+| --------------------------- | ------------ | ------------- |
+| pk_id_beneficio_funcionario | INT          | Identificador |
+| fk_id_tipo_beneficio        | INT          | Tipo          |
+| fk_id_funcionario           | INT          | Funcionário   |
+| valor_beneficio             | DECIMAL(5,2) | Valor         |
+
+
+tb_tipo_ocorrencia
+| Campo                    | Tipo         | Descrição     |
+| ------------------------ | ------------ | ------------- |
+| pk_id_tipo_ocorrencia    | INT          | Identificador |
+| classificacao_ocorrencia | VARCHAR(30)  | Classificação |
+| descricao_ocorrencia     | VARCHAR(100) | Descrição     |
+| pode_gerar_desconto      | BOOLEAN      | Flag          |
+
+
+tb_ocorrencias_funcionario
+| Campo                 | Tipo | Descrição     |
+| --------------------- | ---- | ------------- |
+| pk_id_ocorrencia      | INT  | Identificador |
+| fk_id_funcionario     | INT  | Funcionário   |
+| fk_id_tipo_ocorrencia | INT  | Tipo          |
+| data_ocorrencia       | DATE | Data          |
+| relato_ocorrencia     | TEXT | Relato        |
+
+
+tb_contrato_educacional
+| Campo           | Tipo          | Descrição     |
+| --------------- | ------------- | ------------- |
+| pk_id_contrato  | INT           | Identificador |
+| fk_id_aluno     | INT           | Aluno         |
+| fk_id_curso     | INT           | Curso         |
+| valor_total     | DECIMAL(10,2) | Valor total   |
+| data_assinatura | DATE          | Data          |
+
+
+tb_mensalidade
+| Campo             | Tipo          | Descrição     |
+| ----------------- | ------------- | ------------- |
+| pk_id_mensalidade | INT           | Identificador |
+| fk_id_contrato    | INT           | Contrato      |
+| valor_parcela     | DECIMAL(10,2) | Valor         |
+| data_vencimento   | DATE          | Vencimento    |
+| status_pagamento  | VARCHAR(20)   | Status        |
+
+
+tb_dados_bancarios
+| Campo                | Tipo        | Descrição       |
+| -------------------- | ----------- | --------------- |
+| pk_id_conta_bancaria | INT         | Identificador   |
+| banco                | CHAR(5)     | Código do banco |
+| agencia              | CHAR(4)     | Agência         |
+| conta                | VARCHAR(12) | Conta           |
+| digito_verificador   | CHAR(1)     | Dígito          |
+| chave_pix            | VARCHAR(50) | PIX             |
+
+
+tb_conta_bancaria_funcionario
+| Campo                  | Tipo        | Descrição     |
+| ---------------------- | ----------- | ------------- |
+| pk_id_vinculacao_conta | INT         | Identificador |
+| fk_id_funcionario      | INT         | Funcionário   |
+| fk_id_conta_bancaria   | INT         | Conta         |
+| conta_principal        | BOOLEAN     | Principal     |
+| descricao_uso          | VARCHAR(30) | Uso           |
+
+
+
+tb_folha_pagamento
+| Campo             | Tipo          | Descrição     |
+| ----------------- | ------------- | ------------- |
+| pk_id_pagamento   | INT           | Identificador |
+| fk_id_funcionario | INT           | Funcionário   |
+| salario_base      | DECIMAL(10,2) | Salário       |
+| desconto_total    | DECIMAL(10,2) | Descontos     |
+| salario_liquido   | DECIMAL(10,2) | Líquido       |
+| total_beneficios  | DECIMAL(10,2) | Benefícios    |
+| data_pagamento    | DATE          | Data          |
+
+
+tb_descontos_funcionarios
+| Campo            | Tipo          | Descrição     |
+| ---------------- | ------------- | ------------- |
+| pk_id_desconto   | INT           | Identificador |
+| fk_id_ocorrencia | INT           | Ocorrência    |
+| valor_desconto   | DECIMAL(10,2) | Valor         |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
