@@ -1,0 +1,90 @@
+====================================
+ SELECTS
+
+
+1. Funcionários 
+
+SELECT p.nome, f.data_contratado FROM tb_funcionarios f INNER JOIN tb_perfil p ON f.fk_cpf = p.pk_cpf; 
+
+
+2. Mensalidades pendentes
+
+SELECT *
+FROM tb_mensalidade
+WHERE status_pagamento = 'PENDENTE';
+
+
+3. Alunos e disciplinas
+
+SELECT 
+p.nome, 
+c.nome_curso, 
+m.data_matricula FROM tb_matricula  
+INNER JOIN tb_aluno a ON m.fk_id_aluno = a.pk_id_aluno
+ INNER JOIN tb_perfil p ON a.fk_cpf = p.pk_cpf 
+INNER JOIN tb_turmas t ON m.fk_id_turma = t.pk_id_turma
+ INNER JOIN tb_cursos c ON t.fk_id_curso = c.pk_id_curso; 
+
+
+
+
+
+====================================
+ SUBSELECTS
+
+
+1. Funcionário com maior salário
+
+SELECT
+    p.nome,
+    fp.salario_liquido
+FROM tb_folha_pagamento fp
+INNER JOIN tb_funcionarios f
+    ON fp.fk_id_funcionario = f.pk_id_funcionario
+INNER JOIN tb_perfil p
+    ON f.fk_cpf = p.pk_cpf
+WHERE fp.salario_liquido =
+(
+    SELECT MAX(salario_liquido)
+    FROM tb_folha_pagamento
+);
+
+
+
+2. Professores alunos
+
+SELECT
+    p.nome
+FROM tb_perfil p
+WHERE p.pk_cpf IN
+(
+    SELECT a.fk_cpf
+    FROM tb_aluno a
+)
+AND p.pk_cpf IN
+(
+    SELECT f.fk_cpf
+    FROM tb_funcionarios f
+    INNER JOIN tb_professores pr
+        ON f.pk_id_funcionario = pr.fk_id_funcionario
+);
+
+
+
+3. Alunos acima da média
+
+SELECT
+    p.nome,
+    n.valor_nota
+FROM tb_notas n
+INNER JOIN tb_matricula m
+    ON n.fk_id_matricula = m.pk_id_matricula
+INNER JOIN tb_aluno a
+    ON m.fk_id_aluno = a.pk_id_aluno
+INNER JOIN tb_perfil p
+    ON a.fk_cpf = p.pk_cpf
+WHERE n.valor_nota >
+(
+    SELECT AVG(valor_nota)
+    FROM tb_notas
+);

@@ -20,5 +20,14 @@ Pensando no futuro da instituição, este banco de dados foi modelado com foco e
 * **Mapeamento de Diversidade:** Organização de dados sensíveis (etnia, gênero, deficiências) para relatórios rápidos do MEC e políticas de acessibilidade.
 
 ## Estrutura do Repositório
-* script_criacao_sisgesc: Script DDL contendo a criação de toda a estrutura do banco, chaves primárias/estrangeiras e restrições.
-* docs: Pasta destinada ao armazenamento do Documento de Requisitos, DER e Dicionário de Dados.
+* `docs/Fase1/scholarflow_DDL.sql`: Script DDL contendo a criação da estrutura do banco, chaves primárias e restrições.
+* `docs/Fase2/dml_carga.sql`: Dados de exemplo e scripts de carga para tabelas de configuração, perfis, acadêmico, RH e financeiro.
+* `docs/Fase3/selects.txt`: Consultas de exemplo para relatórios e validação de dados.
+* `docs/Fase4/star_schema_DDL.sql`: Esquema dimensional para apoio a BI e ETL.
+* `docs/Fase4/script_etl.sql`: Script de carga de dimensões e fatos no modelo estrela.
+* `scripts/`: Scripts auxiliares ou complementares do projeto.
+
+## Atualizações recentes
+* Unificação do dialeto SQL em todo o repositório para MySQL/MariaDB.
+* `docs/Fase2/dml_carga.sql` e `docs/Fase4/script_etl.sql` foram convertidos de PostgreSQL (`ON CONFLICT ... DO NOTHING`) para MySQL (`INSERT IGNORE INTO`).
+* O projeto agora está mais consistente para criação do schema e carga de dados em um único SGBD.
